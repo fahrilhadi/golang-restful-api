@@ -7,6 +7,7 @@ import (
 	"github.com/fahrilhadi/golang-restful-api/controller"
 	"github.com/fahrilhadi/golang-restful-api/exception"
 	"github.com/fahrilhadi/golang-restful-api/helper"
+	"github.com/fahrilhadi/golang-restful-api/middleware"
 	"github.com/fahrilhadi/golang-restful-api/repository"
 	"github.com/fahrilhadi/golang-restful-api/service"
 	"github.com/go-playground/validator/v10"
@@ -34,7 +35,7 @@ func main()  {
 
 	server := http.Server{
 		Addr: "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
